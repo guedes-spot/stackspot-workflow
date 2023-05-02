@@ -128,7 +128,7 @@ steps:
     path: user_repo
 
 - bash: |
-    source ../templates/enable_colors.sh
+    # source ../templates/enable_colors.sh
     if $(DEBUG)
     then
       export APPLY_PLUGIN_ENABLE_DEBUG=true
