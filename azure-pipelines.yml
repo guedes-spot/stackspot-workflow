@@ -1,0 +1,82 @@
+variables:
+  stk: stk-beta
+
+parameters:
+  - name: workspace_slug
+    displayName: Workspace
+    type: string
+  - name: action
+    displayName: Action (json)
+    type: string
+  - name: cli_login
+    displayName: CLI login (json)
+    type: string
+    
+trigger:
+- none
+
+jobs:
+- job:
+  displayName: Install STK
+  # pool:
+  #   name: local
+  steps:
+  - script: |
+      rm -rf ~/.$(stk)
+    displayName: Cleanup
+  - script: |
+      curl -O -s https://stk.stackspot.com/installer/linux/$(stk)
+      chmod +x $(stk)
+      ./$(stk) --version
+    displayName: Install STK 
+  - script: |
+      echo '##vso[task.prependpath]$(HOME)/.$(stk)/bin'
+    displayName: Add to PATH
+  - script: |
+      wget https://stk-dev.stackspot.com/env/alpha-qa.env 
+      mv alpha-qa.env ~/.stk-alpha/.env
+      export STK_CLI_TEST=true
+    condition: eq(variables.stk, 'stk-alpha')
+    displayName: Generate .env for QA if is stk-alpha
+  - script: |
+      $(stk) upgrade
+    displayName: Upgrade STK 
+  - script: |
+      export STK_CHANNEL=REMOTE
+      email=$(echo '${{ parameters.cli_login }}' | jq -r '.email')
+      realm=$(echo '${{ parameters.cli_login }}' | jq -r '.realm')
+      echo -e "$(stk) login $email --pat $(secret_cli) --realm $realm\n" 
+      $(stk) login $email --pat $(secret_cli) --realm $realm
+    displayName: Login
+  - script: |
+      echo "$(stk) use workspace ${{ parameters.workspace_slug }}"
+      $(stk) use workspace "${{ parameters.workspace_slug }}"
+    displayName: Use Workspace ${{ parameters.workspace_slug }}
+  - script: |
+      conn=$(echo '${{ parameters.action }}' | jq '.connectors')
+      if [ "$conn" != "null" ]; then 
+          connPrint=$(echo " -ci '$conn'")
+          conn=$(echo $conn | jq -c)
+          conn=$(echo " -ci $conn")
+      fi
+
+      env=$(echo '${{ parameters.action }}' | jq -r '.env')
+      if [ "$env" != "null" ]; then
+        env=$(echo " --env $env")
+      fi
+
+      inputs=$(echo '${{ parameters.action }}' | jq '.inputs')
+      if [ "$inputs" != "null" ]; then 
+          inputsPrint=$(echo " --inputs-json '$inputs'")
+          inputs=$(echo $inputs | jq -c)
+          inputs=$(echo " --inputs-json $inputs")
+      fi
+      name=$(echo '${{ parameters.action }}' | jq -r '.name')
+      echo "$⚡ Running Action: $name"
+      echo -e "$(stk) run action $name $env $inputsPrint $connPrint\n" 
+      $(stk) run action $name $env $inputs $conn
+    displayName: Run action ${{ parameters.workspace_slug }}
+  - script: |
+      cat ~/.$(stk)/logs/*
+    displayName: Show Error Log
+    condition: failed()
