@@ -6,8 +6,9 @@ parameters:
 steps:
     - bash: |
         if [ ! -d '${{ parameters.path }}' ] ; then
-          B64_PAT=$(echo -n ':$(secret_git)' | base64)
-          git -c http.extraHeader="Authorization: Basic ${B64_PAT}" clone $(create_repo) ${{ parameters.path }}
+          B64_PAT=$(echo -n ':$(secret_git)' | base64
+          git config --global --add $(create_repo).extraHeader "Authorization: Basic ${B64_PAT}"
+          git clone $(create_repo) ${{ parameters.path }}
           cd ${{ parameters.path }}
           git checkout $(default_branch) || git checkout -b $(default_branch)
         fi
