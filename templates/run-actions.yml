@@ -12,7 +12,7 @@ parameters:
 steps:
   - bash: |
         echo '${{ parameters.actions }}'
-        source templates/enable_colors.sh
+        source enable_colors.sh
         if $(DEBUG)
         then
           export APPLY_PLUGIN_ENABLE_DEBUG=true
