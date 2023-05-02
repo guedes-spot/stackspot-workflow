@@ -179,7 +179,7 @@ steps:
       git push --set-upstream --force origin $(default_branch)
     fi
   workingDirectory: user_repo
-  failOnStderr: true
+  failOnStderr: false
   displayName: Commit and Push
 
 - template: templates/run-actions.yml
