@@ -12,7 +12,7 @@ parameters:
 steps:
   - bash: |
         echo '${{ parameters.actions }}'
-        echo pwd
+        pwd
         source ../templates/enable_colors.sh
         if $(DEBUG)
         then
