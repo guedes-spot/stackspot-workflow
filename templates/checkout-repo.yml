@@ -13,7 +13,7 @@ steps:
           echo global
           git config --global --list
           echo local
-          git config --global --list
+          git config --local --list
 
           git -c http.extraHeader="Authorization: Basic ${B64_PAT}" clone $(create_repo) ${{ parameters.path }}
           cd ${{ parameters.path }}
@@ -23,7 +23,9 @@ steps:
           echo global
           git config --global --list
           echo local
-          git config --global --list
+          git config --local --list
+          echo default
+          git config --list
 
         fi
       failOnStderr: false
