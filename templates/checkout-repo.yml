@@ -13,7 +13,7 @@ steps:
           git config --global --list
           echo local
           git config --local --list
-          git git config --unset-all http.$(create_repo).extraHeader
+          git config --unset-all http.$(create_repo).extraHeader
           git config --local --add http.$(create_repo).extraHeader "Authorization: Basic ${B64_PAT}"
           git clone $(create_repo) ${{ parameters.path }}
           cd ${{ parameters.path }}
