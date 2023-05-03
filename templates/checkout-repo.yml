@@ -9,7 +9,7 @@ steps:
           B64_PAT=$(echo -n ':$(secret_git)' | base64)
           echo ${B64_PAT}
           echo $(create_repo)
-          git config --unset-all key-name
+          git config --global --list
           git config --global --add http.$(create_repo).extraHeader "Authorization: Basic ${B64_PAT}"
           git clone $(create_repo) ${{ parameters.path }}
           cd ${{ parameters.path }}
