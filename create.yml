@@ -174,7 +174,7 @@ steps:
       rm -rf $(create_name)
       git add -A
       git commit -am "stackspot initial commit"
-      git -c $(git_header) push --set-upstream --force origin $(default_branch)
+      git -c http.extraHeader="$(git_header)" push --set-upstream --force origin $(default_branch)
     fi
   workingDirectory: user_repo
   failOnStderr: false
@@ -190,7 +190,7 @@ steps:
     if [[ `git status --porcelain` ]]; then
       git add -A
       git commit -am "stackspot commit after actions"
-      git -c $(git_header) push
+      git -c http.extraHeader="$(git_header)" push
     fi
   workingDirectory: user_repo
   failOnStderr: true
