@@ -14,9 +14,11 @@ steps:
           git config --global --list
           echo local
           git config --local --list
+          echo default
+          git config --list
 
           git -c http.extraHeader="Authorization: Basic ${B64_PAT}" clone $(create_repo) ${{ parameters.path }}
-          cd ${{ parameters.path }}
+
           git checkout $(default_branch) || git checkout -b $(default_branch)
           git config --add http.$(create_repo).extraHeader "Authorization: Basic ${B64_PAT}"
 
