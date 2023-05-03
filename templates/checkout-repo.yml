@@ -10,11 +10,11 @@ steps:
           git_header="Authorization: Basic ${B64_PAT}"
           echo "##vso[task.setvariable variable=git_header;issecret=true]$git_header"
 
-          git -c http.extraHeader="$git_header" clone $(create_repo) ${{ parameters.path }} 2>&1
+          git -c http.extraHeader="$git_header" clone $(create_repo) ${{ parameters.path }}
           cd ${{ parameters.path }}
           git checkout $(default_branch) || git checkout -b $(default_branch)
         fi
-      failOnStderr: true
+      failOnStderr: false
       displayName: Checkout Existing Repository
       condition: and(succeeded(), ne(variables.create_repo, ''))
     - bash: |
