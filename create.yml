@@ -103,8 +103,6 @@ steps:
     git config --global user.email $email
     git config --global user.name $email
 
-    echo "secret_stk_login=$(secret_stk_login)"
-
   failOnStderr: true
   displayName: Validate Inputs and pre-configs
 
