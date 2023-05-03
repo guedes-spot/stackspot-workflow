@@ -10,17 +10,16 @@ steps:
           # git config --global --add http.$(create_repo).extraHeader "Authorization: Basic ${B64_PAT}"
           # git clone $(create_repo) ${{ parameters.path }}
 
-          echo global
-          git config --global --list
-          echo local
-          git config --local --list
-          echo default
-          git config --list
+          git config --unset-all http.$(create_repo).extraHeader
+          git config --global --unset-all http.$(create_repo).extraHeader
+          git config --local --unset-all http.$(create_repo).extraHeader
 
-          git -c http.extraHeader="Authorization: Basic ${B64_PAT}" clone $(create_repo) ${{ parameters.path }}
+          git_header=http.extraHeader="Authorization: Basic ${B64_PAT}"
+          echo "##vso[task.setvariable variable=git_header;]$git_header"
+
+          git -c $git_header clone $(create_repo) ${{ parameters.path }}
 
           git checkout $(default_branch) || git checkout -b $(default_branch)
-          git config --add http.$(create_repo).extraHeader "Authorization: Basic ${B64_PAT}"
 
           echo global
           git config --global --list
