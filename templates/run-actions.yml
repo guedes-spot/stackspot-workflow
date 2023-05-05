@@ -11,10 +11,10 @@ parameters:
 
 steps:
   - bash: |
-        # echo '${{ parameters.actions }}'
-        # tree
-        # source ../templates/enable_colors.sh
-        find . | sed -e "s/[^-][^\/]*\// |/g" -e "s/|\([^ ]\)/|-\1/"
+        #colors
+        u_cyan='\033[4;36m'
+        green='\033[0;32m'
+
         if $(DEBUG)
         then
           export APPLY_PLUGIN_ENABLE_DEBUG=true
