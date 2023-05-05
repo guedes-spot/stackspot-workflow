@@ -117,46 +117,50 @@ steps:
     path: user_repo
 
 - bash: |
-    # source ../templates/enable_colors.sh
-    if $(DEBUG)
-    then
-      export APPLY_PLUGIN_ENABLE_DEBUG=true
-      export COMMAND_ARGS_ENABLE_DEBUG=true
-    fi
-
-    conn=""
-    connPrint=""
-    if [ '$(create_connectors)' != '' ]; then 
-        conn="--connection-interfaces $(echo '$(create_connectors)' | jq . -c)"
-        connPrint="--connection-interfaces '$(echo '$(create_connectors)' | jq )'" 
-    fi
-
-    inputsValue="{}"
-    inputsPrint=""
-    if [ '$(create_inputs)' != '' ]; then 
-        inputsValue=$(echo '$(create_inputs)' | jq . -c)
-        inputsPrint="--inputs-json '$(echo '$(create_inputs)' | jq )'" 
-    fi
-
-    starter_stack="--starter $(create_starter)"
-    if [ '${{ parameters.create_type }}' == 'infra' ]; then 
-      starter_stack="--stack $(create_stack)"
-    fi
-
-    echo -e "\n${green}⚡ Running create ${{ parameters.create_type }} - ${u_cyan}$(create_name)"
-    echo -e "$(stk) create ${{ parameters.create_type }} $(create_name) $starter_stack $connPrint --remote https://dev.azure.com/${{ parameters.git_org }}/$(create_name) --description '$(create_description)' $inputsPrint --non-interactive\n" 
-
-    $(stk) create ${{ parameters.create_type }} $(create_name) $starter_stack $conn --remote https://dev.azure.com/${{ parameters.git_org }}/$(create_name) --description "$(create_description)" --inputs-json "$inputsValue" --non-interactive
+    echo "hello stacker" >> test.txt
   workingDirectory: user_repo
-  failOnStderr: true
-  displayName: Create ${{ parameters.create_type}}
 
-- bash: |
-    cd $(create_name)
-    $(stk) register ${{ parameters.create_type}}
-  failOnStderr: true
-  workingDirectory: user_repo
-  displayName: Register ${{ parameters.create_type}}
+# - bash: |
+#     # source ../templates/enable_colors.sh
+#     if $(DEBUG)
+#     then
+#       export APPLY_PLUGIN_ENABLE_DEBUG=true
+#       export COMMAND_ARGS_ENABLE_DEBUG=true
+#     fi
+
+#     conn=""
+#     connPrint=""
+#     if [ '$(create_connectors)' != '' ]; then 
+#         conn="--connection-interfaces $(echo '$(create_connectors)' | jq . -c)"
+#         connPrint="--connection-interfaces '$(echo '$(create_connectors)' | jq )'" 
+#     fi
+
+#     inputsValue="{}"
+#     inputsPrint=""
+#     if [ '$(create_inputs)' != '' ]; then 
+#         inputsValue=$(echo '$(create_inputs)' | jq . -c)
+#         inputsPrint="--inputs-json '$(echo '$(create_inputs)' | jq )'" 
+#     fi
+
+#     starter_stack="--starter $(create_starter)"
+#     if [ '${{ parameters.create_type }}' == 'infra' ]; then 
+#       starter_stack="--stack $(create_stack)"
+#     fi
+
+#     echo -e "\n${green}⚡ Running create ${{ parameters.create_type }} - ${u_cyan}$(create_name)"
+#     echo -e "$(stk) create ${{ parameters.create_type }} $(create_name) $starter_stack $connPrint --remote https://dev.azure.com/${{ parameters.git_org }}/$(create_name) --description '$(create_description)' $inputsPrint --non-interactive\n" 
+
+#     $(stk) create ${{ parameters.create_type }} $(create_name) $starter_stack $conn --remote https://dev.azure.com/${{ parameters.git_org }}/$(create_name) --description "$(create_description)" --inputs-json "$inputsValue" --non-interactive
+#   workingDirectory: user_repo
+#   failOnStderr: true
+#   displayName: Create ${{ parameters.create_type}}
+
+# - bash: |
+#     cd $(create_name)
+#     $(stk) register ${{ parameters.create_type}}
+#   failOnStderr: true
+#   workingDirectory: user_repo
+#   displayName: Register ${{ parameters.create_type}}
 
 - bash: |
     if [[ `git status --porcelain` ]]; then
