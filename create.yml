@@ -160,6 +160,7 @@ steps:
 
 - bash: |
     cd $(create_name)
+    export HTTP_ENABLE_DEBUG=true
     $(stk) register ${{ parameters.create_type}}
   failOnStderr: true
   workingDirectory: user_repo
