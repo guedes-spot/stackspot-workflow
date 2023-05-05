@@ -3,7 +3,6 @@ steps:
       export STK_CHANNEL=REMOTE
       echo "##vso[task.setvariable variable=STK_CHANNEL]REMOTE"
       echo -e "$(stk) login $(email) --pat $(secret_stk_login) --realm $(realm)\n" 
-      #$(stk) login $(email) --pat $(secret_stk_login) --realm $(realm)
-      $(stk) login --client-id 01GZMPHW8T9RZ82J32KFAA2MP4 --client-key S8145NWlhR15zfMXknBf4jEkvgsTEdy8 --realm stackspot-engineering
+      $(stk) login $(email) --pat $(secret_stk_login) --realm $(realm)
     failOnStderr: true
     displayName: Login
