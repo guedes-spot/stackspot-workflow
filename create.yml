@@ -17,9 +17,6 @@ parameters:
   - name: actions
     displayName: Actions (json)
     type: string
-  - name: git_org
-    displayName: azure git project
-    type: string
   - name: config
     displayName: Extra config (json)
     type: string
