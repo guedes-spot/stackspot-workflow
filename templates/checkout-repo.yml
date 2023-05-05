@@ -15,5 +15,5 @@ steps:
           git checkout $(default_branch) || git checkout -b $(default_branch)
         fi
       failOnStderr: false
-      displayName: Checkout Existing Repository
+      displayName: Checkout Repository
       condition: and(succeeded(), ne(variables.create_repo, ''))
