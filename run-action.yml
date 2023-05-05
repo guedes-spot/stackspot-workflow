@@ -20,19 +20,19 @@ steps:
 - bash: |
     ##VARIABLES
 
-    # # config
-    # debug=$(echo '${{ parameters.config }}' | jq -cr '.debug // empty')
-    # echo "##vso[task.setvariable variable=DEBUG;]$debug"
+    # config
+    debug=$(echo '${{ parameters.config }}' | jq -cr '.debug // empty')
+    echo "##vso[task.setvariable variable=DEBUG;]$debug"
   
-    # stk=$(echo '${{ parameters.config }}' | jq -cr '.stk // empty')
-    # echo "##vso[task.setvariable variable=stk;]$stk"
+    stk=$(echo '${{ parameters.config }}' | jq -cr '.stk // empty')
+    echo "##vso[task.setvariable variable=stk;]$stk"
 
-    # # cli_login
-    # email=$(echo '${{ parameters.cli_login }}' | jq -cr '.email // empty')
-    # echo "##vso[task.setvariable variable=email;]$email"
+    # cli_login
+    email=$(echo '${{ parameters.cli_login }}' | jq -cr '.email // empty')
+    echo "##vso[task.setvariable variable=email;]$email"
 
-    # realm=$(echo '${{ parameters.cli_login }}' | jq -cr '.realm // empty')
-    # echo "##vso[task.setvariable variable=realm;]$realm"
+    realm=$(echo '${{ parameters.cli_login }}' | jq -cr '.realm // empty')
+    echo "##vso[task.setvariable variable=realm;]$realm"
 
     ##VALIDATIONS
 
