@@ -14,7 +14,7 @@ parameters:
   - name: config
     displayName: Extra config (json)
     type: string
-    default: "{ \"debug\": true, \"stk\": \"stk-beta\"}"
+    default: "{ \"debug\": false, \"stk\": \"stk-beta\"}"
 
 steps:
 - bash: |

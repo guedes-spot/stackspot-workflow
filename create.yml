@@ -20,7 +20,7 @@ parameters:
   - name: config
     displayName: Extra config (json)
     type: string
-    default: "{\"default_branch\": \"main\", \"debug\": true, \"stk\": \"stk-beta\", \"origin_repository\": \"stack-spot/stackspot-workflows-action\", \"origin_branch\": \"main\"}"
+    default: "{\"default_branch\": \"main\", \"debug\": false, \"stk\": \"stk-beta\"}"
 
 steps:
 - bash: |
@@ -94,7 +94,7 @@ steps:
     [ "$debug" = "null" ] && echo echo "ERROR: 'debug' field not found in json for 'config' input" >&2
     [ "$stk" = "null" ] && echo echo "ERROR: 'stk' field not found in json for 'config' input" >&2
 
-    # git
+    ## GIT CONFIG
     git config --global user.email $email
     git config --global user.name $email
 
