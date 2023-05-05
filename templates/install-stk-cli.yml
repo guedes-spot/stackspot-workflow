@@ -12,4 +12,4 @@ steps:
         export STK_CLI_TEST=true
       fi
     failOnStderr: true
-    displayName: Install STK 
+    displayName: Install stk 

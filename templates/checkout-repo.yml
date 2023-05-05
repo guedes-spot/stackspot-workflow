@@ -17,9 +17,3 @@ steps:
       failOnStderr: false
       displayName: Checkout Existing Repository
       condition: and(succeeded(), ne(variables.create_repo, ''))
-    - bash: |
-        echo "TODO: created repo checkout"
-        exit 1
-      failOnStderr: true
-      displayName: Checkout Created Repository
-      condition: and(succeeded(), eq(variables.create_repo, ''))

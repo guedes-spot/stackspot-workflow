@@ -106,8 +106,7 @@ steps:
 - bash: |
     echo "$(stk) use workspace ${{ parameters.workspace_slug }}"
     $(stk) use workspace "${{ parameters.workspace_slug }}"
-    find . | sed -e "s/[^-][^\/]*\// |/g" -e "s/|\([^ ]\)/|-\1/"
-  displayName: Use Workspace ${{ parameters.workspace_slug }}
+  displayName: Use workspace ${{ parameters.workspace_slug }}
 
 - template: templates/run-actions.yml
   parameters:
