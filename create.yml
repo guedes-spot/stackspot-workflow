@@ -151,9 +151,9 @@ steps:
     fi
 
     echo -e "\n${green}⚡ Running create ${{ parameters.create_type }} - ${u_cyan}$(create_name)"
-    echo -e "$(stk) create ${{ parameters.create_type }} $(create_name) $starter_stack $connPrint --remote https://dev.azure.com/${{ parameters.git_org }}/$(create_name) --description '$(create_description)' $inputsPrint --non-interactive\n" 
+    echo -e "$(stk) create ${{ parameters.create_type }} $(create_name) $starter_stack $connPrint --remote '$(create_repo)' --description '$(create_description)' $inputsPrint --non-interactive\n" 
 
-    $(stk) create ${{ parameters.create_type }} $(create_name) $starter_stack $conn --remote https://dev.azure.com/${{ parameters.git_org }}/$(create_name) --description "$(create_description)" --inputs-json "$inputsValue" --non-interactive
+    $(stk) create ${{ parameters.create_type }} $(create_name) $starter_stack $conn --remote "$(create_repo)" --description "$(create_description)" --inputs-json "$inputsValue" --non-interactive
   workingDirectory: user_repo
   failOnStderr: true
   displayName: Create ${{ parameters.create_type}}
