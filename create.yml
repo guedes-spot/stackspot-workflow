@@ -24,12 +24,14 @@ parameters:
 
 steps:
 - bash: |
-    ## git_org
+    ##VARIABLES
+
+    # git_org
     org_url=$(echo $(System.CollectionUri) | sed 's/.$//')
     git_org=${org_url##*/}
     echo "##vso[task.setvariable variable=git_org;]$git_org"
 
-    ## config
+    # config
     debug=$(echo '${{ parameters.config }}' | jq -cr '.debug // empty')
     echo "##vso[task.setvariable variable=DEBUG;]$debug"
   
@@ -39,14 +41,14 @@ steps:
     default_branch=$(echo '${{ parameters.config }}' | jq -cr '.default_branch // empty')
     echo "##vso[task.setvariable variable=default_branch;]$default_branch"
 
-    ## cli_login
+    # cli_login
     email=$(echo '${{ parameters.cli_login }}' | jq -cr '.email // empty')
     echo "##vso[task.setvariable variable=email;]$email"
 
     realm=$(echo '${{ parameters.cli_login }}' | jq -cr '.realm // empty')
     echo "##vso[task.setvariable variable=realm;]$realm"
 
-    ## create
+    # create
     create_name=$(echo '${{ parameters.create }}' | jq -cr '.name // empty')
     echo "##vso[task.setvariable variable=create_name;]$create_name"
 
@@ -68,7 +70,7 @@ steps:
     create_repo=$(echo '${{ parameters.create }}' | jq -cr '.repo // empty')
     echo "##vso[task.setvariable variable=create_repo;]$create_repo"
 
-    ## actions
+    # actions
     actions_before=$(echo '${{ parameters.actions }}' | jq -cr '.before')
     echo "##vso[task.setvariable variable=actions_before;]$actions_before"
 
@@ -77,22 +79,22 @@ steps:
 
     ##VALIDATIONS
 
-    ## create
+    # create
     [ "$create_name" = "null" ] && echo "ERROR: 'name' field not found in json for 'create' input" >&2
     [ "$create_description" = "null" ] && echo "ERROR: 'description' field not found in json for 'create' input" >&2
     [ "$create_description" = "null" ] && echo "ERROR: 'description' field not found in json for 'create' input" >&2
     [ "$create_starter" = "null" ] && [ "$create_stack" = "null" ] && echo "ERROR: 'starter' and 'stack' field not found in json for 'create' input" >&2
 
-    ## cli_login
+    # cli_login
     [ "$realm" = "null" ] && echo "ERROR: 'realm' field not found in json for 'cli_login' input" >&2
     [ "$email" = "null" ] && echo "ERROR: 'email' field not found in json for 'cli_login' input" >&2
 
-    ## config
+    # config
     [ "$default_branch" = "null" ] && echo "ERROR: 'default_branch' field not found in json for 'config' input" >&2
     [ "$debug" = "null" ] && echo echo "ERROR: 'debug' field not found in json for 'config' input" >&2
     [ "$stk" = "null" ] && echo echo "ERROR: 'stk' field not found in json for 'config' input" >&2
 
-    ##GIT
+    # git
     git config --global user.email $email
     git config --global user.name $email
 
