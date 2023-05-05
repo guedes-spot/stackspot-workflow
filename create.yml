@@ -1,6 +1,3 @@
-# trigger:
-# - none
-
 parameters:
   - name: correlation_id
     displayName: Correlation id
@@ -28,12 +25,6 @@ parameters:
     type: string
     default: "{\"default_branch\": \"main\", \"debug\": true, \"stk\": \"stk-beta\", \"origin_repository\": \"stack-spot/stackspot-workflows-action\", \"origin_branch\": \"main\"}"
 
-# pool:
-#   name: local
-
-# jobs:
-# - job:
-#   displayName: ${{ parameters.correlation_id }}
 steps:
 - bash: |
     ## config
