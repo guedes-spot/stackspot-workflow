@@ -99,7 +99,7 @@ steps:
     git config --global user.name $email
 
   failOnStderr: true
-  displayName: Validate Inputs and pre-configs
+  displayName: Validate inputs and pre-configs
 
 - template: templates/install-stk-cli.yml
 

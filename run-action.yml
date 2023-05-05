@@ -49,7 +49,7 @@ steps:
     [ "$action_name" = "null" ] && echo echo "ERROR: 'name' field not found in json for 'action' input" >&2
  
   failOnStderr: true
-  displayName: Validate Inputs and pre-configs
+  displayName: Validate inputs and pre-configs
 
 - template: templates/install-stk-cli.yml
 
