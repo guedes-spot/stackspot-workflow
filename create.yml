@@ -184,7 +184,7 @@ steps:
 - template: templates/run-actions.yml
   parameters:
     actions: $(actions_after)
-    git_org: ${{ parameters.git_org }}
+    git_org: $(git_org)
     time: after
 
 - bash: |
