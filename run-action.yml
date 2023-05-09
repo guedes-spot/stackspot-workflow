@@ -41,7 +41,7 @@ steps:
     [ "$email" = "" ] && echo "ERROR: 'email' field not found in json for 'cli_login' input" >&2
 
     # config
-    [ "$stk" = "" ] && echo echo "ERROR: 'stk' field not found in json for 'config' input" >&2
+    [ "$stk" = "" ] && echo "ERROR: 'stk' field not found in json for 'config' input" >&2
 
     # action
     # action_name=$(echo '${{ parameters.action }}' | jq -r '.name')
