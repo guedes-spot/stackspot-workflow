@@ -36,17 +36,16 @@ steps:
 
     # ##VALIDATIONS
 
-    # # cli_login
-    # [ "$realm" = "null" ] && echo "ERROR: 'realm' field not found in json for 'cli_login' input" >&2
-    # [ "$email" = "null" ] && echo "ERROR: 'email' field not found in json for 'cli_login' input" >&2
+    # cli_login
+    [ "$realm" = "null" ] && echo "ERROR: 'realm' field not found in json for 'cli_login' input" >&2
+    [ "$email" = "null" ] && echo "ERROR: 'email' field not found in json for 'cli_login' input" >&2
 
-    # # config
-    # [ "$debug" = "null" ] && echo echo "ERROR: 'debug' field not found in json for 'config' input" >&2
-    # [ "$stk" = "null" ] && echo echo "ERROR: 'stk' field not found in json for 'config' input" >&2
+    # config
+    [ "$stk" = "null" ] && echo echo "ERROR: 'stk' field not found in json for 'config' input" >&2
 
-    # # action
-    # action_name=$(echo '${{ parameters.action }}' | jq -cr '.name // empty')
-    # [ "$action_name" = "null" ] && echo echo "ERROR: 'name' field not found in json for 'action' input" >&2
+    # action
+    action_name=$(echo '${{ parameters.action }}' | jq -r '.name')
+    [ "$action_name" = "null" ] && echo echo "ERROR: 'name' field not found in json for 'action' input" >&2
   failOnStderr: true
   displayName: Validate inputs
 
