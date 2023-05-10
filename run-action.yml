@@ -37,6 +37,7 @@ steps:
     # ##VALIDATIONS
 
     # cli_login
+    
     # [ "$realm" = "" ] && echo "ERROR: 'realm' field not found in json for 'cli_login' input" >&2
     # [ "$email" = "" ] && echo "ERROR: 'email' field not found in json for 'cli_login' input" >&2
 

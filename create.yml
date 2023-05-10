@@ -80,19 +80,19 @@ steps:
     ##VALIDATIONS
 
     # create
-    [ "$create_name" = "null" ] && echo "ERROR: 'name' field not found in json for 'create' input" >&2
-    [ "$create_description" = "null" ] && echo "ERROR: 'description' field not found in json for 'create' input" >&2
-    [ "$create_description" = "null" ] && echo "ERROR: 'description' field not found in json for 'create' input" >&2
-    [ "$create_starter" = "null" ] && [ "$create_stack" = "null" ] && echo "ERROR: 'starter' and 'stack' field not found in json for 'create' input" >&2
+    [ "$create_name" = "" ] && echo "ERROR: 'name' field not found in json for 'create' input" >&2
+    [ "$create_description" = "" ] && echo "ERROR: 'description' field not found in json for 'create' input" >&2
+    [ "$create_description" = "" ] && echo "ERROR: 'description' field not found in json for 'create' input" >&2
+    [ "$create_starter" = "" ] && [ "$create_stack" = "" ] && echo "ERROR: 'starter' and 'stack' field not found in json for 'create' input" >&2
 
     # cli_login
-    [ "$realm" = "null" ] && echo "ERROR: 'realm' field not found in json for 'cli_login' input" >&2
-    [ "$email" = "null" ] && echo "ERROR: 'email' field not found in json for 'cli_login' input" >&2
+    [ "$realm" = "" ] && echo "ERROR: 'realm' field not found in json for 'cli_login' input" >&2
+    [ "$email" = "" ] && echo "ERROR: 'email' field not found in json for 'cli_login' input" >&2
 
     # config
-    [ "$default_branch" = "null" ] && echo "ERROR: 'default_branch' field not found in json for 'config' input" >&2
-    [ "$debug" = "null" ] && echo echo "ERROR: 'debug' field not found in json for 'config' input" >&2
-    [ "$stk" = "null" ] && echo echo "ERROR: 'stk' field not found in json for 'config' input" >&2
+    [ "$default_branch" = "" ] && echo "ERROR: 'default_branch' field not found in json for 'config' input" >&2
+    [ "$debug" = "" ] && echo echo "ERROR: 'debug' field not found in json for 'config' input" >&2
+    [ "$stk" = "" ] && echo echo "ERROR: 'stk' field not found in json for 'config' input" >&2
 
     ## GIT CONFIG
     git config --global user.email $email
