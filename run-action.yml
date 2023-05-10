@@ -25,6 +25,7 @@ steps:
     echo "##vso[task.setvariable variable=DEBUG;]$debug"
   
     stk=$(echo '${{ parameters.config }}' | jq -cr '.stk // empty')
+    [ "$stk" = "" ] && stk = "stk-beta"
     echo "##vso[task.setvariable variable=stk;]$stk"
 
     # cli_login
@@ -38,11 +39,8 @@ steps:
 
     # cli_login
     
-    # [ "$realm" = "" ] && echo "ERROR: 'realm' field not found in json for 'cli_login' input" >&2
-    # [ "$email" = "" ] && echo "ERROR: 'email' field not found in json for 'cli_login' input" >&2
-
-    # config
-    # [ "$stk" = "" ] && echo "ERROR: 'stk' field not found in json for 'config' input" >&2
+    [ "$realm" = "" ] && echo "ERROR: 'realm' field not found in json for 'cli_login' input" >&2
+    [ "$email" = "" ] && echo "ERROR: 'email' field not found in json for 'cli_login' input" >&2
 
     # action
     # action_name=$(echo '${{ parameters.action }}' | jq -r '.name')
